@@ -5,25 +5,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sibra Blog</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.min.css">
 </head>
 
-<body>
+<body class="post-body">
 
-    <div class="container mt-5">
-        <h1 class="mb-1"> <%= article.title %> </h1>
-        <div class="text-muted mb-2">
-            Published at: <%= article.createdAt.toLocaleDateString() %> 
-        </div>
-        <a href="/" class="btn btn-secondary">All articles</a>
-        <a href="/articles/edit/<%= article.id %> " class="btn btn-info text-white">Edit</a>
-        
-        <div class="markdown">
-            <%- article.sanitizedHtml %> 
-        </div>
-    </div>
+    <%- include('_navbar') %>
 
+        <div class="post post-container">
+            <h1 class="post__title">
+                <%= article.title %>
+            </h1>
+            <p class="post__description">
+                <%= article.description %>
+            </p>
+            <div class="post__date">
+                Fecha de publicación: <%= article.createdAt.toLocaleDateString() %>
+            </div>
+            <!-- <a href="/" class="btn btn-secondary">All articles</a> -->
+            <!-- <a href="/articles/edit/<%= article.id %> " class="btn btn-info text-white">Edit</a> -->
+
+            <div class="post__content">
+                <div class="post-html">
+                    <%- article.sanitizedHtml %>
+                </div>
+            </div>
+
+            <a href="/" class="btn btn-secondary">All articles</a>
+            <a href="/articles/edit/<%= article.id %> " class="btn btn-info text-white">Edit</a>
+        </div>
+
+        <h2 class="moreTitle">Más Posts</h2>
+        <div class="more">
+            
+            <% articles.forEach(article=> { %>
+                <div class="card">
+                    <div class="card__header">
+                        <div class="card__img">
+                            <img src="https://decoraideas.com/wp-content/uploads/2016/06/017_.jpg" alt="home">
+                        </div>
+                    </div>
+                    <div class="card__body">
+                        <div class="card__body__top">
+                            <h4 class="card__title">
+                                <%= article.title %>
+                            </h4>
+                            <div class="card__date">
+                                Fecha de publicación: <%= article.createdAt.toLocaleDateString() %>
+                            </div>
+                        </div>
+                        <div class="card__text">
+                            <%= article.description %>
+                        </div>
+                        <a href="<%= article.slug %>" class="card__btn">Leer más</a>
+                        <!-- <a href="articles/edit/<%= article.id %>" class="btn btn-info mt-3 text-white">Edit</a> -->
+                        <!-- <form action="/articles/<%= article.id %>?_method=DELETE" method="POST">
+                            <button type="submit" class="btn btn-danger mt-1">Delete</button>
+                        </form> -->
+                    </div>
+                </div>
+                <% }) %>
+        </div>
+
+        <script src="/js/index.js"></script>
 </body>
 
 </html>

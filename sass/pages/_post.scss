@@ -1,0 +1,121 @@
+.post-body {
+    // background-color: red;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(45deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%, rgb(236, 236, 236) 100%);
+}
+
+.post-container {
+    width: 900px;
+    margin: 13rem auto 8rem auto;
+    background-color: white;
+
+    @include respond(from-tab-land) {
+        padding: 2rem;
+        border-radius: .8rem;
+        // @include shadow-light;
+    }
+
+    @include respond(tab-port) {
+        width: 90%;
+    }
+
+}
+
+.post {
+
+    &__title {
+        font-size: 4.6rem;
+        text-align: left;
+        line-height: 5.5rem;
+    }
+
+    &__description {
+        margin: 2.5rem 0;
+        font-size: 2.2rem;
+        line-height: 2.5rem;
+        color: $color-gray;
+    }
+
+    &__date {
+        font-size: 1.6rem;
+        color: $color-gray;
+        margin-bottom: 3rem;
+    }
+
+    &__content {
+        margin: 0 auto;
+        font-size: 1.7rem;
+
+        & h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            margin-top: 3rem;
+        }
+
+        & p {
+            line-height: 4rem;
+        }
+
+        & blockquote {
+            border-left: 1rem solid $color-gray;
+            color: #3e3e3e;
+
+            padding-left: 3rem;
+            font-size: 1.5rem;
+            font-style: italic;
+            margin: 3rem 0;
+        }
+
+        & ol,
+        ul {
+            padding-left: 4rem;
+        }
+
+        & hr {
+            margin: 3rem 0;
+        }
+
+        & img {
+            width: 100%;
+        }
+
+        & a {
+            color: #46d148;
+        }
+    }
+}
+
+.more {
+    width: 1200px;
+    margin: 0 auto 5rem auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2rem;
+
+
+    @include respond(tab-port) {
+        width: 90%;
+    }
+
+    // & .card {
+    //     max-width: 100vh !important;
+    //     height: 650px;
+
+    //     &:first-child {
+    //         grid-column: 1/-1;
+    //         // max-height: 100vh !important;
+    //         // height: 400px !important;
+    //         width: 100%;
+    //     }
+    // }
+
+
+
+}
+
+.moreTitle {
+    text-align: center;
+    margin-bottom: 5rem;
+}

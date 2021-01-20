@@ -1,0 +1,42 @@
+
+
+.posts-container {
+    width: 1200px;
+    margin: 13rem auto 8rem auto;
+    // background-color: red;
+
+    & h1 {
+        font-size: 5rem;
+    }
+
+    
+    & .post {
+        margin: 3rem auto;
+        // display: flex;
+        // justify-content: space-between;
+        // flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 2rem;
+
+        @include respond(tab-port){
+            flex-direction: column;
+        }
+        
+    }
+
+
+    @include respond(tab-port){
+        width: 90%;
+    }
+
+    & textarea,
+    & input {
+        font-size: 1.3rem;
+    }
+
+}
+
+.markdown {
+    height: 50vh;
+}

@@ -1,7 +1,16 @@
 
-@import "components/blog-entry";
+
+
+
 
 @import "abstracts/mixins";
 @import "abstracts/variables";
+
+@import "components/card";
+@import "components/navbar";
+
+@import "layout/posts-container";
+
+@import "pages/post";
 
 @import "base/base";

@@ -28,8 +28,15 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     line-height: 1.7;
-
-
     box-sizing: border-box;
+    font-size: 2rem;
+    color: #292929;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(45deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%, rgb(236, 236, 236) 100%);
 
 }
+
+img {
+    max-width: 100%;
+}
+
