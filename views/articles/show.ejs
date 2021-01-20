@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sibra Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <h1 class="mb-1"> <%= article.title %> </h1>
+        <div class="text-muted mb-2">
+            Published at: <%= article.createdAt.toLocaleDateString() %> 
+        </div>
+        <a href="/" class="btn btn-secondary">All articles</a>
+        <a href="/articles/edit/<%= article.id %> " class="btn btn-info text-white">Edit</a>
+        
+        <div class="markdown">
+            <%- article.sanitizedHtml %> 
+        </div>
+    </div>
+
+</body>
+
+</html>
