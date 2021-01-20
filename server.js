@@ -4,6 +4,7 @@ const Article = require('./models/article')
 const articleRouter = require("./routes/articles");
 const app = express();
 const methodOverride = require('method-override');
+const path = require('path');
 
 mongoose.connect("mongodb://localhost/blog", {
   useNewUrlParser: true,
@@ -14,6 +15,8 @@ mongoose.connect("mongodb://localhost/blog", {
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.get("/", async (req, res) => {
