@@ -19,7 +19,7 @@
         <div class="post">
 
             <% articles.forEach(article=> { %>
-                <div onclick="location.href='articles/<%= article.slug %>';" style="cursor: pointer;" class="card mt-4">
+                <div onclick="location.href='/articles/<%= article.slug %>';" style="cursor: pointer;" class="card mt-4">
                     <div class="card__header">
                         <div class="card__img">
                             <img src="/images/<%= article.image %> " alt="home">
@@ -37,7 +37,7 @@
                         <div class="card__text">
                             <%= article.description %>
                         </div>
-                        <a href="articles/<%= article.slug %>" class="card__btn">Leer más</a>
+                        <a href="/articles/<%= article.slug %>" class="card__btn">Leer más</a>
                         <!-- <a href="articles/edit/<%= article.id %>" class="btn btn-info mt-3 text-white">Edit</a> -->
                         <!-- <form action="/articles/<%= article.id %>?_method=DELETE" method="POST">
                             <button type="submit" class="btn btn-danger mt-1">Delete</button>

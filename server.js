@@ -12,6 +12,10 @@ mongoose.connect(DB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true
+}, err => {
+  if (err) return console.log(`Error while connecting to DB\n`, err);
+
+  return console.log(`Connected DB`);
 });
 
 app.set("view engine", "ejs");
@@ -26,6 +30,6 @@ app.get("/", async (req, res) => {
   res.render("articles/index", { articles: articles });
 });
 
-app.listen(5000);
+app.listen(5000, () => console.log('App listening on port: ' + 5000));
 
 app.use("/articles", articleRouter);
