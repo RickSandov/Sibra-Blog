@@ -1,5 +1,6 @@
 const express = require('express');
-const Article = require('./../models/article');
+const path = require('path');
+const Article = require('../models/article');
 const router = express.Router();
 const multer = require('multer');
 
@@ -9,12 +10,12 @@ const storage = multer.diskStorage({
 
     // Destination for files
     destination: function (req, file, callback){
-        callback(null, './public/images')
+        return callback(null, path.join(__dirname, '..', 'public', 'images'));
     },
     
     // add back extension
     filename: function (req, file, callback){
-        callback(null, file.originalname)
+        return callback(null, file.originalname);
     }
 });
 
