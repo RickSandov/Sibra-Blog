@@ -24,47 +24,55 @@
             </div>
             <!-- <a href="/" class="btn btn-secondary">All articles</a> -->
             <!-- <a href="/articles/edit/<%= article.id %> " class="btn btn-info text-white">Edit</a> -->
-
+            <div class="post__image">
+                <img src="/images/<%= article.image %> " alt="">
+            </div>
             <div class="post__content">
                 <div class="post-html">
                     <%- article.sanitizedHtml %>
                 </div>
             </div>
 
-            <a href="/" class="btn btn-secondary">All articles</a>
             <a href="/articles/edit/<%= article.id %> " class="btn btn-info text-white">Edit</a>
         </div>
 
         <h2 class="moreTitle">Más Posts</h2>
+        
         <div class="more">
-            
-            <% articles.forEach(article=> { %>
-                <div class="card">
-                    <div class="card__header">
-                        <div class="card__img">
-                            <img src="https://decoraideas.com/wp-content/uploads/2016/06/017_.jpg" alt="home">
-                        </div>
-                    </div>
-                    <div class="card__body">
-                        <div class="card__body__top">
-                            <h4 class="card__title">
-                                <%= article.title %>
-                            </h4>
-                            <div class="card__date">
-                                Fecha de publicación: <%= article.createdAt.toLocaleDateString() %>
+
+            <% articles.forEach(post => { %>
+
+                <% if (post.id !== article.id) { %>
+
+                    <div onclick="location.href='articles/<%= post.slug %>';" style="cursor: pointer;" class="card mt-4">
+                        <div class="card__header">
+                            <div class="card__img">
+                                <img src="/images/<%= post.image %> " alt="home">
                             </div>
                         </div>
-                        <div class="card__text">
-                            <%= article.description %>
+                        <div class="card__body">
+                            <div class="card__body__top">
+                                <h4 class="card__title">
+                                    <%= post.title %>
+                                </h4>
+                                <div class="card__date">
+                                    Fecha de publicación: <%= post.createdAt.toLocaleDateString() %>
+                                </div>
+                            </div>
+                            <div class="card__text">
+                                <%= post.description %>
+                            </div>
+                            <a href="articles/<%= post.slug %>" class="card__btn">Leer más</a>
                         </div>
-                        <a href="<%= article.slug %>" class="card__btn">Leer más</a>
-                        <!-- <a href="articles/edit/<%= article.id %>" class="btn btn-info mt-3 text-white">Edit</a> -->
-                        <!-- <form action="/articles/<%= article.id %>?_method=DELETE" method="POST">
-                            <button type="submit" class="btn btn-danger mt-1">Delete</button>
-                        </form> -->
                     </div>
-                </div>
-                <% }) %>
+
+                <% } %>
+
+            <% }) %>
+
+        </div>
+        <div class="all">
+            <a href="/" class="btn">Todos los Posts</a>
         </div>
 
         <script src="/js/index.js"></script>
