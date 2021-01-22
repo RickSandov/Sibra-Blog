@@ -6,7 +6,9 @@ const app = express();
 const methodOverride = require('method-override');
 const path = require('path');
 
-mongoose.connect("mongodb://localhost/blog", {
+const DB_URI = process.env.DB_URI || "mongodb://localhost/blog";
+
+mongoose.connect(DB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true
@@ -25,7 +27,5 @@ app.get("/", async (req, res) => {
 });
 
 app.listen(5000);
-
-
 
 app.use("/articles", articleRouter);
