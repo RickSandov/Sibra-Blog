@@ -15,6 +15,7 @@ mongoose.connect(DB_URI, {
 });
 
 app.set("view engine", "ejs");
+app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
 
