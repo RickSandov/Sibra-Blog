@@ -14,15 +14,15 @@
 
     <div class="posts-container mt-5">
         <h1>Sibra Blog</h1>
-        <!-- <a href="/articles/new" class="btn btn-success">New Article</a> -->
+        <a href="/articles/new" class="btn btn-success">New Article</a>
 
         <div class="post">
 
             <% articles.forEach(article=> { %>
-                <div class="card mt-4">
+                <div onclick="location.href='articles/<%= article.slug %>';" style="cursor: pointer;" class="card mt-4">
                     <div class="card__header">
                         <div class="card__img">
-                            <img src="https://i.pinimg.com/originals/a4/f8/f9/a4f8f91b31d2c63a015ed34ae8c13bbd.jpg" alt="home">
+                            <img src="/images/<%= article.image %> " alt="home">
                         </div>
                     </div>
                     <div class="card__body">
@@ -44,7 +44,8 @@
                         </form> -->
                     </div>
                 </div>
-                <% }) %>
+            <% }) %>
+
         </div>
 
     </div>

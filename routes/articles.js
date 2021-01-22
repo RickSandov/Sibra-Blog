@@ -1,6 +1,33 @@
 const express = require('express');
 const Article = require('./../models/article');
 const router = express.Router();
+const multer = require('multer');
+
+// Define storage for images
+
+const storage = multer.diskStorage({
+
+    // Destination for files
+    destination: function (req, file, callback){
+        callback(null, './public/images')
+    },
+    
+    // add back extension
+    filename: function (req, file, callback){
+        callback(null, file.originalname)
+    }
+});
+
+// upload parameters for multer
+const upload = multer({
+    storage: storage,
+    limits: {
+        fieldSize: 1024 * 1024 * 3
+    }
+});
+
+
+
 
 router.get('/new', (req, res) => {
     res.render('articles/new', { article: new Article });
@@ -19,7 +46,10 @@ router.get('/:slug', async (req, res) => {
 });
 
 // Create post
-router.post('/', async (req, res, next) => {
+router.post('/', upload.single('image'), async (req, res, next) => {
+
+    console.log(req.file);
+
     req.article = new Article();
     next();
 }, saveArticleAndRedirect('new'));
@@ -27,7 +57,7 @@ router.post('/', async (req, res, next) => {
 
 
 // method="PUT" to edit
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', upload.single('image'), async (req, res, next) => {
     req.article = await Article.findById(req.params.id);
     next();
 }, saveArticleAndRedirect('edit'));
@@ -47,6 +77,11 @@ function saveArticleAndRedirect(path) {
         article.title = req.body.title;
         article.description = req.body.description;
         article.markdown = req.body.markdown;
+        
+        if(!article.image){
+            article.image = req.file.filename;
+        }
+
         try {
             //console.log(req.article._id, article._id);
             article = await article.save();
