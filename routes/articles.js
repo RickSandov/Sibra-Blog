@@ -27,9 +27,6 @@ const upload = multer({
     }
 });
 
-
-
-
 router.get('/new', (req, res) => {
     res.render('articles/new', { article: new Article });
 });
