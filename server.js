@@ -13,13 +13,20 @@ const morgan = require('morgan');
 
 require('./config/passport');
 
-mongoose.connect("mongodb://localhost/blog", {
+const DB_URI = process.env.DB_URI || "mongodb://localhost/blog";
+
+mongoose.connect(DB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true
+}, err => {
+  if (err) return console.log(`Error while connecting to DB\n`, err);
+
+  return console.log(`Connected DB`);
 });
 
 app.set("view engine", "ejs");
+app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
 app.use(session({
@@ -44,22 +51,16 @@ app.use(morgan('dev'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 app.get("/admin", (req, res) => {
   res.render("users/sign-in");
 });
-
 
 app.get("/", async (req, res) => {
   const articles = await Article.find().sort( { createdAt: 'desc' });
   res.render("articles/index", { articles: articles });
 });
 
-app.listen(5000);
-
-
+app.listen(5000, () => console.log('App listening on port: ' + 5000));
 
 app.use("/articles", articleRouter);
 app.use("/admin", usersRouter);
-
-

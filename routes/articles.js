@@ -1,4 +1,6 @@
 const express = require('express');
+const path = require('path');
+const Article = require('../models/article');
 const router = express.Router();
 
 const Article = require('./../models/article');
@@ -11,14 +13,12 @@ const storage = multer.diskStorage({
 
     // Destination for files
     destination: function (req, file, callback){
-        console.log('Destination');
-        callback(null, './public/images')
+        return callback(null, path.join(__dirname, '..', 'public', 'images'));
     },
     
     // add back extension
     filename: function (req, file, callback){
-        console.log('add extension');
-        callback(null, file.originalname)
+        return callback(null, file.originalname);
     }
 });
 
@@ -30,10 +30,7 @@ const upload = multer({
     }
 });
 
-
-
-
-router.get('/new', isAuthenticated, (req, res) => {
+router.get('/new', (req, res) => {
     res.render('articles/new', { article: new Article });
 });
 
@@ -95,12 +92,11 @@ function saveArticleAndRedirect(path) {
 }
 
 router.get('/:slug', async (req, res) => {
-    const article = await Article.findOne({ slug: req.params.slug }).populate({ path: 'author', select: { password: 0, name: 0, _id: 0 } });
-    const articles = await Article.find().sort( { createdAt: 'desc' });
+    const articleQuery = Article.findOne({ slug: req.params.slug }).populate({ path: 'author', select: { password: 0, name: 0, _id: 0 } });
+    const articlesQuery = Article.find().sort( { createdAt: 'desc' });
+    const [article, articles] = await Promise.all([articleQuery, articlesQuery]);
     if(article == null) res.redirect('/')
     res.render('articles/show', { article: article, articles: articles });
 });
-
-
 
 module.exports = { router, upload};

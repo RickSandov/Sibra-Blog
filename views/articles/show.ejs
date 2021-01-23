@@ -51,7 +51,7 @@
 
                 <% if (post.id !==article.id) { %>
 
-                    <div onclick="location.href='./<%= post.slug %>';" style="cursor: pointer;" class="card mt-4">
+                    <div onclick="location.href='/articles/<%= post.slug %>';" style="cursor: pointer;" class="card mt-4">
                         <div class="card__header">
                             <div class="card__img">
                                 <img src="/images/<%= post.image %> " alt="home">
@@ -69,7 +69,7 @@
                             <div class="card__text">
                                 <%= post.description %>
                             </div>
-                            <a href="articles/<%= post.slug %>" class="card__btn">Leer más</a>
+                            <a href="/articles/<%= post.slug %>" class="card__btn">Leer más</a>
                         </div>
                     </div>
 
