@@ -20,7 +20,7 @@ router.post('/sign-in', passport.authenticate('local', {
 
 
 // NEEDS AUTHENTICATION
-router.get('/sign-up', (req, res) => {
+router.get('/sign-up', isAuthenticated, (req, res) => {
     res.render('users/sign-up');
 });
 
@@ -33,7 +33,7 @@ router.get('/posts', isAuthenticated, async (req, res) => {
 
 
 // NEEDS AUTHENTICATION
-router.post('/register', upload.single('image'), async (req, res) => {
+router.post('/register', isAuthenticated, upload.single('image'), async (req, res) => {
     const { name, dispName, password, confirm_password } = req.body;
     const errors = [];
     let image;
