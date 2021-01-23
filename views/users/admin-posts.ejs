@@ -10,7 +10,7 @@
 
 <body>
 
-
+    <%- include('_navbar') %>
 
     <div class="posts-container mt-5">
         <h1>Sibra Blog</h1>
@@ -19,7 +19,7 @@
         <div class="post">
 
             <% articles.forEach(article=> { %>
-                <div onclick="location.href='articles/<%= article.slug %>';" style="cursor: pointer;" class="card no-anim">
+                <div onclick="location.href='./<%= article.slug %>';" style="cursor: pointer;" class="card no-anim">
                     <div class="card__header">
                         <div class="card__img">
                             <img src="/images/<%= article.image %> " alt="home">
@@ -41,7 +41,7 @@
                             <form action="/articles/<%= article.id %>?_method=DELETE" method="POST">
                                 <button type="submit" class="card__del">Eliminar</button>
                             </form>
-                            <a href="/articles/edit/<%= article.id %>" class="card__edit">Editar</a>
+                            <a href="/articles/edit/<%= article.id %>" class="btn-edit">Editar</a>
                         </div>
                     </div>
                 </div>

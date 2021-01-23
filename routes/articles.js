@@ -3,6 +3,7 @@ const router = express.Router();
 
 const Article = require('./../models/article');
 const multer = require('multer');
+const { isAuthenticated } = require('./../helpers/auth');
 
 // Define storage for images
 
@@ -10,11 +11,13 @@ const storage = multer.diskStorage({
 
     // Destination for files
     destination: function (req, file, callback){
+        console.log('Destination');
         callback(null, './public/images')
     },
     
     // add back extension
     filename: function (req, file, callback){
+        console.log('add extension');
         callback(null, file.originalname)
     }
 });
@@ -30,20 +33,18 @@ const upload = multer({
 
 
 
-router.get('/new', (req, res) => {
+router.get('/new', isAuthenticated, (req, res) => {
     res.render('articles/new', { article: new Article });
 });
 
-router.get('/edit/:id', async (req, res) => {
+router.get('/edit/:id', isAuthenticated, async (req, res) => {
     const article = await Article.findById(req.params.id);
     res.render('articles/edit', { article: article });
 });
 
 
 // Create post
-router.post('/', upload.single('image'), async (req, res, next) => {
-
-    console.log(req.file);
+router.post('/', upload.single('image'), isAuthenticated, async (req, res, next) => {
 
     req.article = new Article();
     next();
@@ -52,16 +53,16 @@ router.post('/', upload.single('image'), async (req, res, next) => {
 
 
 // method="PUT" to edit
-router.put('/:id', upload.single('image'), async (req, res, next) => {
+router.put('/:id', upload.single('image'), isAuthenticated, async (req, res, next) => {
     req.article = await Article.findById(req.params.id);
     next();
 }, saveArticleAndRedirect('edit'));
 
 
 // method="DELETE";
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', isAuthenticated, async (req, res) => {
     await Article.findByIdAndDelete(req.params.id);
-    res.redirect('/');
+    res.redirect('/admin/posts');
 });
 
 
@@ -77,10 +78,15 @@ function saveArticleAndRedirect(path) {
             article.image = req.file.filename;
         }
 
+        if(!article.author){
+            article.author = req.user._id;
+        }
+
+
         try {
-            //console.log(req.article._id, article._id);
             article = await article.save();
-            res.redirect(`articles/${article.slug}`)
+            console.log(article);
+            res.redirect(`/admin/${article.slug}`)
         } catch (e) {
             res.render(`articles/${path}`, { article: article }
             );
@@ -89,12 +95,12 @@ function saveArticleAndRedirect(path) {
 }
 
 router.get('/:slug', async (req, res) => {
-    const article = await Article.findOne({ slug: req.params.slug });
-    const articles = await Article.find().sort( { createdAt: 'desc' } );
+    const article = await Article.findOne({ slug: req.params.slug }).populate({ path: 'author', select: { password: 0, name: 0, _id: 0 } });
+    const articles = await Article.find().sort( { createdAt: 'desc' });
     if(article == null) res.redirect('/')
     res.render('articles/show', { article: article, articles: articles });
 });
 
 
 
-module.exports = router;
+module.exports = { router, upload};

@@ -2,27 +2,43 @@ const express = require('express');
 const router = express.Router();
 
 const User = require('./../models/user');
+const Article = require('./../models/article');
 
 const passport = require('passport');
 
-router.get('/sign-in', (req, res) => {
-    res.render('users/sign-in');
-});
+const { upload } = require('./articles');
+
+const { isAuthenticated } = require('./../helpers/auth');
+
+
 
 router.post('/sign-in', passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: '/admin/posts',
     failureRedirect: '/admin/sign-in',
     failureFlash: true
 }));
 
+
+// NEEDS AUTHENTICATION
 router.get('/sign-up', (req, res) => {
     res.render('users/sign-up');
 });
 
+router.get('/posts', isAuthenticated, async (req, res) => {
+    console.log(req.isAuthenticated());
+    const articles = await Article.find().sort( { createdAt: 'desc' } );
+    res.render('users/admin-posts', { articles: articles});
+});
 
-router.post('/register', async (req, res) => {
-    const { name, email, password, confirm_password} = req.body;
+
+
+// NEEDS AUTHENTICATION
+router.post('/register', upload.single('image'), async (req, res) => { 
+    const { name, dispName, password, confirm_password} = req.body;
+    const image = req.file.filename;
     const errors = [];
+
+    console.log('Nuevo usuario');
     if (name.lenght <= 0){
         errors.push({text: 'Nombre inválido'});
     }
@@ -33,20 +49,36 @@ router.post('/register', async (req, res) => {
         errors.push({text: 'Contraseña debe tener más de 4 caracteres'})
     }
     if (errors.length > 0) {
-        res.render('users/sign-up', { errors, name, email });
+        res.render('users/sign-up', { errors, name, dispName });
     } else {
-        const emailUSer = await User.findOne({ email: email });
-        if(emailUSer){
+        const nameUser = await User.findOne({ name: name });
+        if(nameUser){
             // req.flash('error_msg', `El ususario con correo electrónico ${email} ya está registrado. Intente con un correo diferente.`);
             res.redirect('/admin/sign-up');
         };
-        const newUser = new User({name, email, password});
+        const newUser = new User({name, dispName, password, image});
         newUser.password = await newUser.encryptPassword(password);
+        console.log(newUser);
         await newUser.save();
         // req.flash('success_msg', `Bienvenido, ${name}!`);
         res.redirect('/admin/sign-in');
     }
-    
 });
+
+
+router.get('/log-out', (req, res) => {
+    req.logOut();
+    res.redirect('sign-in');
+});
+
+
+router.get('/:slug', isAuthenticated, async (req, res) => {
+    const article = await Article.findOne({ slug: req.params.slug }).populate({ path: 'author', select: { password: 0, name: 0, _id: 0 } });
+    const articles = await Article.find().sort( { createdAt: 'desc' } );
+    if(article == null) res.redirect('/')
+    res.render('users/show', { article: article, articles: articles });
+});
+
+
 
 module.exports = router;

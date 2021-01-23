@@ -4,9 +4,9 @@ const bcrypt = require('bcryptjs');
 
 const UserSchema = new Schema({
     name: { type: String, required: true },
-    email: { type: String, required: true },
+    dispName: { type: String, required: true },
     password: { type: String, required: true },
-    date: { type: Date, default: Date.now }
+    image: { type: String, default: '/images/profile.png' }
 })
 
 UserSchema.methods.encryptPassword = async (password) => {

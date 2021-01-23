@@ -19,11 +19,19 @@
             <p class="post__description">
                 <%= article.description %>
             </p>
-            <div class="post__date">
-                Fecha de publicación: <%= article.createdAt.toLocaleDateString() %>
+            <div class="post__info">
+                <div class="post__date">
+                    Fecha de publicación: <%= article.createdAt.toLocaleDateString() %>
+                </div>
+                <div class="post__author">
+                    <p class="name">
+                        <span>Por:</span><%= article.author.dispName %>
+                    </p>
+                    <img src="/images/<%= article.author.image %>" alt="">
+                </div>
+                
             </div>
-            <!-- <a href="/" class="btn btn-secondary">All articles</a> -->
-            <!-- <a href="/articles/edit/<%= article.id %> " class="btn btn-info text-white">Edit</a> -->
+
             <div class="post__image">
                 <img src="/images/<%= article.image %> " alt="">
             </div>
@@ -33,16 +41,15 @@
                 </div>
             </div>
 
-            <a href="/articles/edit/<%= article.id %> " class="btn btn-info text-white">Edit</a>
         </div>
 
         <h2 class="moreTitle">Más Posts</h2>
-        
+
         <div class="more">
 
-            <% articles.forEach(post => { %>
+            <% articles.forEach(post=> { %>
 
-                <% if (post.id !== article.id) { %>
+                <% if (post.id !==article.id) { %>
 
                     <div onclick="location.href='./<%= post.slug %>';" style="cursor: pointer;" class="card mt-4">
                         <div class="card__header">
@@ -66,9 +73,9 @@
                         </div>
                     </div>
 
-                <% } %>
+                    <% } %>
 
-            <% }) %>
+                        <% }) %>
 
         </div>
         <div class="all">

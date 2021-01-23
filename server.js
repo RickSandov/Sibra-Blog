@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const Article = require('./models/article')
-const articleRouter = require("./routes/articles");
+const articleRouter = require("./routes/articles").router;
 const usersRouter = require("./routes/users");
 const app = express();
 const methodOverride = require('method-override');
@@ -9,6 +9,7 @@ const path = require('path');
 const passport = require('passport');
 const session = require('express-session');
 const flash = require('connect-flash');
+const morgan = require('morgan');
 
 require('./config/passport');
 
@@ -39,22 +40,19 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(morgan('dev'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.get("/", async (req, res) => {
-  const articles = await Article.find().sort( { createdAt: 'desc' } );
-  res.render("articles/index", { articles: articles });
-});
-
-app.get("/admin/posts", async (req, res) => {
-  const articles = await Article.find().sort( { createdAt: 'desc' } );
-  res.render("users/admin-posts", { articles: articles });
-});
-
 app.get("/admin", (req, res) => {
-  res.render("users/admin");
+  res.render("users/sign-in");
+});
+
+
+app.get("/", async (req, res) => {
+  const articles = await Article.find().sort( { createdAt: 'desc' });
+  res.render("articles/index", { articles: articles });
 });
 
 app.listen(5000);
@@ -63,3 +61,5 @@ app.listen(5000);
 
 app.use("/articles", articleRouter);
 app.use("/admin", usersRouter);
+
+

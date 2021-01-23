@@ -3,6 +3,7 @@ const marked = require("marked");
 const slugify = require("slugify");
 const createDomPurify = require("dompurify");
 const { JSDOM } = require("jsdom");
+const { types } = require("node-sass");
 const dompurify = createDomPurify(new JSDOM().window);
 
 const articleSchema = new mongoose.Schema({
@@ -33,6 +34,11 @@ const articleSchema = new mongoose.Schema({
   image: {
     type: String,
     required: true
+  },
+  author: {
+    type: mongoose.Types.ObjectId,
+    required: true,
+    ref: 'User'
   }
 });
 

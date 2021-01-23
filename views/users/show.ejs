@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sibra Blog</title>
+    <link rel="stylesheet" href="/css/style.min.css">
+</head>
+
+<body class="post-body">
+
+        <div class="post post-container">
+            <h1 class="post__title">
+                <%= article.title %>
+            </h1>
+            <p class="post__description">
+                <%= article.description %>
+            </p>
+            <div class="post__info">
+                <div class="post__date">
+                    Fecha de publicación: <%= article.createdAt.toLocaleDateString() %>
+                </div>
+                <div class="post__author">
+                    <p class="name">
+                        <span>Por:</span><%= article.author.dispName %>
+                    </p>
+                    <img src="/images/<%= article.author.image %>" alt="">
+                </div>
+                
+            </div>
+            <a href="/articles/edit/<%= article.id %> " class="btn-edit ">Edit</a>
+            <div class="post__image mt-3">
+                <img src="/images/<%= article.image %> " alt="">
+            </div>
+            <div class="post__content">
+                <div class="post-html">
+                    <%- article.sanitizedHtml %>
+                </div>
+            </div>
+
+            
+        </div>
+
+        <div class="all">
+            <a href="/admin/posts" class="btn">Todos los Posts</a>
+        </div>
+
+        <script src="/js/index.js"></script>
+</body>
+
+</html>
