@@ -93,6 +93,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 2rem;
+    max-width: 80%;
 
 
     @include respond(tab-port) {
@@ -100,7 +101,7 @@
     }
 
     & .card {
-        
+
         &:hover {
             transform: scale(1.02);
         }
