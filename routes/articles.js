@@ -2,10 +2,8 @@ const express = require('express');
 const path = require('path');
 const Article = require('../models/article');
 const router = express.Router();
-
-const Article = require('./../models/article');
 const multer = require('multer');
-const { isAuthenticated } = require('./../helpers/auth');
+const { isAuthenticated } = require('../helpers/auth');
 
 // Define storage for images
 
