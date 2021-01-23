@@ -50,8 +50,7 @@
             <% articles.forEach(post=> { %>
 
                 <% if (post.id !==article.id) { %>
-
-                    <div onclick="location.href='/articles/<%= post.slug %>';" style="cursor: pointer;" class="card mt-4">
+                    <div onclick="location.href='./<%= post.slug %>';" style="cursor: pointer;" class="card mt-4">
                         <div class="card__header">
                             <div class="card__img">
                                 <img src="/images/<%= post.image %> " alt="home">
