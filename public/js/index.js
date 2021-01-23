@@ -1,5 +1,3 @@
-
-
 // Get the navbar
 let navbar = document.getElementById("navbar");
 
@@ -18,3 +16,13 @@ function myFunction() {
 }
 
 window.onscroll = function() {myFunction()};
+
+// Navigation Toggle
+const navbarNav = document.querySelector('.navbar__list');
+const navbarLogo = document.querySelector('.navbar__logo');
+const navbarToggler = document.querySelector('.navbar__toggler');
+
+navbarToggler.addEventListener('click', () => {
+  // console.log('click')
+  navbar.classList.toggle('active');
+});
