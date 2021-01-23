@@ -26,37 +26,40 @@ router.get('/sign-up', (req, res) => {
 
 router.get('/posts', isAuthenticated, async (req, res) => {
     console.log(req.isAuthenticated());
-    const articles = await Article.find().sort( { createdAt: 'desc' } );
-    res.render('users/admin-posts', { articles: articles});
+    const articles = await Article.find().sort({ createdAt: 'desc' });
+    res.render('users/admin-posts', { articles: articles });
 });
 
 
 
 // NEEDS AUTHENTICATION
-router.post('/register', upload.single('image'), async (req, res) => { 
-    const { name, dispName, password, confirm_password} = req.body;
-    const image = req.file.filename;
+router.post('/register', upload.single('image'), async (req, res) => {
+    const { name, dispName, password, confirm_password } = req.body;
     const errors = [];
+    let image;
+    if (req.file) {
+        image = req.file.filename;
+    }
 
     console.log('Nuevo usuario');
-    if (name.lenght <= 0){
-        errors.push({text: 'Nombre inválido'});
+    if (name.lenght <= 0) {
+        errors.push({ text: 'Nombre inválido' });
     }
-    if (password != confirm_password){
-        errors.push({text: 'Las contraseñas no coinciden'});
+    if (password != confirm_password) {
+        errors.push({ text: 'Las contraseñas no coinciden' });
     }
     if (password.lenght <= 4) {
-        errors.push({text: 'Contraseña debe tener más de 4 caracteres'})
+        errors.push({ text: 'Contraseña debe tener más de 4 caracteres' })
     }
     if (errors.length > 0) {
         res.render('users/sign-up', { errors, name, dispName });
     } else {
         const nameUser = await User.findOne({ name: name });
-        if(nameUser){
+        if (nameUser) {
             // req.flash('error_msg', `El ususario con correo electrónico ${email} ya está registrado. Intente con un correo diferente.`);
             res.redirect('/admin/sign-up');
         };
-        const newUser = new User({name, dispName, password, image});
+        const newUser = new User({ name, dispName, password, image });
         newUser.password = await newUser.encryptPassword(password);
         console.log(newUser);
         await newUser.save();
@@ -74,8 +77,8 @@ router.get('/log-out', (req, res) => {
 
 router.get('/:slug', isAuthenticated, async (req, res) => {
     const article = await Article.findOne({ slug: req.params.slug }).populate({ path: 'author', select: { password: 0, name: 0, _id: 0 } });
-    const articles = await Article.find().sort( { createdAt: 'desc' } );
-    if(article == null) res.redirect('/')
+    const articles = await Article.find().sort({ createdAt: 'desc' });
+    if (article == null) res.redirect('/')
     res.render('users/show', { article: article, articles: articles });
 });
 
