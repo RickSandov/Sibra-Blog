@@ -1,15 +1,18 @@
-<nav class="res-nav" id="navbar">
-    <div>
-        <input type="checkbox" id="check">
-        <label for="check" data-aos="popUp" class="nav-check"><i class="fas fa-bars"></i></label>
-        <ul>
-            <li><a href="/">Inicio</a></li>
-            <li><a href="proyectos.html">Proyectos</a></li>
-            <li><a href="nosotros.html">Nosotros</a></li>
-            <li class="active"><a href="/">Blog</a></li>
-            <li><a href="contacto.html">Contacto</a></li>
+<nav class="res-nav navbar" id="navbar">
+    <div class="navbar__nav">
+        <!-- <input type="checkbox" id="check"> -->
+        <!-- <label for="check" data-aos="popUp" class="nav-check"><i class="fas fa-bars"></i></label> -->
+        <ul class="navbar__list">
+            <li class="navbar__item"><a href="/" class="navbar__link">Inicio</a></li>
+            <li class="navbar__item"><a href="https://www.sibradgo.com/proyectos" class="navbar__link">Proyectos</a></li>
+            <li class="navbar__item"><a href="https://www.sibradgo.com/acerca" class="navbar__link">Nosotros</a></li>
+            <li class="navbar__item active"><a href="/" class="navbar__link">Blog</a></li>
+            <li class="navbar__item"><a href="https://www.sibradgo.com/#contacto" class="navbar__link">Contacto</a></li>
         </ul>
     </div>
-    <a href="https://www.sibradgo.com/#" class="logo"><img src="https://www.sibradgo.com/raw/img/logo.png" alt=""></a>
-
+    <a href="https://www.sibradgo.com/#" class="logo"><img class="navbar__logo" src="https://www.sibradgo.com/raw/img/logo.png" alt=""></a>
+    <div class="navbar__toggler">
+        <svg class="icon open"><use href="/images/sprite.svg#bars"></use></svg>
+        <svg class="icon close"><use href="/images/sprite.svg#cross"></use></svg>
+    </div>
 </nav>

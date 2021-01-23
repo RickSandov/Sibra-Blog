@@ -49,6 +49,19 @@
 
         ; //1800px
     }
+
+    /* Mobile First */
+    @if $breakpoint==mob-sm {
+        @media (max-width: 20em) {
+            @content;
+        }
+    }
+
+    @if $breakpoint==mob-tab {
+        @media (max-width: 48em) {
+            @content;
+        }
+    }
 }
 
 

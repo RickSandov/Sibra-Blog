@@ -1,14 +1,16 @@
-
-
 .posts-container {
     width: 1000px;
     margin: 13rem auto 8rem auto;
     // background-color: red;
 
+    @include respond(tab-port){
+        width: 90%;
+        margin: 5rem auto;
+    }
+
     & h1 {
         font-size: 5rem;
     }
-
     
     & .post {
         margin: 3rem auto;
@@ -23,11 +25,6 @@
             flex-direction: column;
         }
         
-    }
-
-
-    @include respond(tab-port){
-        width: 90%;
     }
 
     & textarea,

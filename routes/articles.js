@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const path = require('path');
 const Article = require('./../models/article');
 const multer = require('multer');
 const { isAuthenticated } = require('./../helpers/auth');
@@ -11,14 +11,12 @@ const storage = multer.diskStorage({
 
     // Destination for files
     destination: function (req, file, callback){
-        console.log('Destination');
-        callback(null, './public/images')
+        return callback(null, path.join(__dirname, '..', 'public', 'images'));
     },
     
     // add back extension
     filename: function (req, file, callback){
-        console.log('add extension');
-        callback(null, file.originalname)
+        return callback(null, file.originalname);
     }
 });
 
@@ -30,9 +28,6 @@ const upload = multer({
     }
 });
 
-
-
-
 router.get('/new', isAuthenticated, (req, res) => {
     res.render('articles/new', { article: new Article });
 });
@@ -42,15 +37,12 @@ router.get('/edit/:id', isAuthenticated, async (req, res) => {
     res.render('articles/edit', { article: article });
 });
 
-
 // Create post
 router.post('/', upload.single('image'), isAuthenticated, async (req, res, next) => {
 
     req.article = new Article();
     next();
 }, saveArticleAndRedirect('new'));
-
-
 
 // method="PUT" to edit
 router.put('/:id', upload.single('image'), isAuthenticated, async (req, res, next) => {
