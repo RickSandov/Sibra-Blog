@@ -1,21 +1,21 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/admin/posts">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/admin/posts">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/admin/sign-up">Crear nuevo usuario</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/admin/log-out">Cerrar sesión</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+<nav class="res-nav navbar" id="navbar">
+  <div class="navbar__nav">
+    <!-- <input type="checkbox" id="check"> -->
+    <!-- <label for="check" data-aos="popUp" class="nav-check"><i class="fas fa-bars"></i></label> -->
+    <ul class="navbar__list">
+      <li class="navbar__item"><a href="/" class="navbar__link">Inicio</a></li>
+      <li class="navbar__item"><a href="/admin/sign-up" class="navbar__link">Crear Nuevo Usuario</a></li>
+      <li class="navbar__item"><a href="/admin/log-out" class="navbar__link">Cerrar Sesión</a></li>
+    </ul>
+  </div>
+  <a href="https://www.sibradgo.com/#" class="logo"><img class="navbar__logo"
+      src="https://www.sibradgo.com/raw/img/logo.png" alt=""></a>
+  <div class="navbar__toggler">
+    <svg class="icon open">
+      <use href="/images/sprite.svg#bars"></use>
+    </svg>
+    <svg class="icon close">
+      <use href="/images/sprite.svg#cross"></use>
+    </svg>
+  </div>
+</nav>

@@ -51,18 +51,10 @@ app.use(morgan('dev'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-<<<<<<< HEAD
-=======
-
->>>>>>> styles
 app.get("/admin", (req, res) => {
   res.render("users/sign-in");
 });
 
-<<<<<<< HEAD
-=======
-
->>>>>>> styles
 app.get("/", async (req, res) => {
   const articles = await Article.find().sort( { createdAt: 'desc' });
   res.render("articles/index", { articles: articles });
@@ -72,8 +64,3 @@ app.listen(5000, () => console.log('App listening on port: ' + 5000));
 
 app.use("/articles", articleRouter);
 app.use("/admin", usersRouter);
-<<<<<<< HEAD
-=======
-
-
->>>>>>> styles

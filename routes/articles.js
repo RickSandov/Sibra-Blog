@@ -1,13 +1,7 @@
 const express = require('express');
-<<<<<<< HEAD
 const path = require('path');
 const Article = require('../models/article');
 const router = express.Router();
-=======
-const router = express.Router();
-const path = require('path');
-const Article = require('./../models/article');
->>>>>>> styles
 const multer = require('multer');
 const { isAuthenticated } = require('../helpers/auth');
 
@@ -34,11 +28,7 @@ const upload = multer({
     }
 });
 
-<<<<<<< HEAD
-router.get('/new', (req, res) => {
-=======
 router.get('/new', isAuthenticated, (req, res) => {
->>>>>>> styles
     res.render('articles/new', { article: new Article });
 });
 
