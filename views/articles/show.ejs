@@ -11,8 +11,8 @@
 <body class="post-body">
 
     <%- include('_navbar') %>
-
         <div class="post post-container">
+            <button type="button" class="post__goback" id="gobackBtn">&LeftArrow;</button>
             <h1 class="post__title">
                 <%= article.title %>
             </h1>
@@ -25,11 +25,12 @@
                 </div>
                 <div class="post__author">
                     <p class="name">
-                        <span>Por:</span><%= article.author.dispName %>
+                        <span>Por:</span>
+                        <%= article.author.dispName %>
                     </p>
                     <img src="/images/<%= article.author.image %>" alt="">
                 </div>
-                
+
             </div>
 
             <div class="post__image">
@@ -81,6 +82,7 @@
             <a href="/" class="btn">Todos los Posts</a>
         </div>
 
+        <script src="/js/navigation.js"></script>
         <script src="/js/index.js"></script>
 </body>
 

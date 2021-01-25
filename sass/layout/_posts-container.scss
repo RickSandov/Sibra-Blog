@@ -5,11 +5,15 @@
 
     @include respond(tab-port){
         width: 90%;
-        margin: 5rem auto;
+        // margin: 5rem auto;
     }
 
     & h1 {
         font-size: 5rem;
+
+        @include respond(mob-phone-l) {
+            font-size: 4rem;
+        }
     }
     
     & .post {

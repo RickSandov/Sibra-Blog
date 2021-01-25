@@ -1,6 +1,4 @@
 
-
-
 @mixin respond($breakpoint) {
     @if $breakpoint==phone {
         @media (max-width: 37.5em) {
@@ -62,6 +60,19 @@
             @content;
         }
     }
+
+    @if $breakpoint==mob-phone-l {
+        @media (max-width: 26.5625rem) {
+            @content;
+        }
+    }
+
+    /* Break */
+    @if $breakpoint==bb-665 {
+        @media (max-width: 62.5em) {
+            @content;
+        }
+    }
 }
 
 
@@ -81,10 +92,3 @@
     // box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.301);
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.192);
 }
-
-// @mixin btn {
-    
-// }
-
-
-

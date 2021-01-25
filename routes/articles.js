@@ -74,7 +74,6 @@ function saveArticleAndRedirect(path) {
             article.author = req.user._id;
         }
 
-
         try {
             article = await article.save();
             console.log(article);
