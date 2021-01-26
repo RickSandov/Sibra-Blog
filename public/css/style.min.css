@@ -368,6 +368,29 @@
 .logo-admin {
   width: 50%; }
 
+.edit-img {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 3rem; }
+  .edit-img img {
+    max-width: 100%;
+    width: 50%;
+    overflow: hidden; }
+  .edit-img button {
+    border: none;
+    background: none;
+    color: tomato;
+    border: 1px solid tomato;
+    margin-right: 2rem;
+    outline: none;
+    padding: 1rem 3rem;
+    border-radius: 8px;
+    transition: .4s all ease-in-out; }
+    .edit-img button:hover {
+      background-color: tomato;
+      color: white !important; }
+
 *,
 *::after,
 *::before {

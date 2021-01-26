@@ -3,11 +3,8 @@ const router = express.Router();
 
 const User = require('./../models/user');
 const Article = require('./../models/article');
-
 const passport = require('passport');
-
 const { upload } = require('./articles');
-
 const { isAuthenticated } = require('./../helpers/auth');
 
 
@@ -20,7 +17,7 @@ router.post('/sign-in', passport.authenticate('local', {
 
 
 // NEEDS AUTHENTICATION
-router.get('/sign-up', (req, res) => {
+router.get('/sign-up', isAuthenticated, (req, res) => {
     res.render('users/sign-up');
 });
 
@@ -33,7 +30,7 @@ router.get('/posts', isAuthenticated, async (req, res) => {
 
 
 // NEEDS AUTHENTICATION
-router.post('/register', upload.single('image'), async (req, res) => { 
+router.post('/register', isAuthenticated, upload.single("image"), async (req, res) => { 
     const { name, dispName, password, confirm_password} = req.body;
     const image = req.file.filename;
     const errors = [];

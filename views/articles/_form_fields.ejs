@@ -6,6 +6,7 @@
     <label for="description">Descripción</label>
     <textarea required name="description" id="description" class="form-control"><%=article.description%></textarea>
 </div>
+
 <% if (!article.image) { %>
 
     <div class="form-group mt-3">
@@ -14,6 +15,7 @@
     </div>
 
 <% } %>
+
 <div class="form-group mt-3 mb-3">
     <label for="markdown">Blog</label>
     <textarea required name="markdown" id="markdown" class="form-control  markdown"><%=article.markdown%></textarea>

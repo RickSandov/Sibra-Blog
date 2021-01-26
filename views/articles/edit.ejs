@@ -15,9 +15,24 @@
     <div class="posts-container mt-5" id="edit">
         <h1 class="mb-4">Editar Post</h1>
 
+        <% if (article.image) { %>
+
+            <div class="form-group mt-3">
+                <label for="image">Imagen Principal</label>
+                <div class="edit-img">
+                    <img src="/images/<%= article.image %> " alt="">
+                    <form action="/articles/edit/<%= article.id %>?_method=DELETE"  method="POST">
+                        <button type="submit" class="continue">Eliminar</button>
+                    </form>
+                </div>
+            </div>
+        
+        <% } %>
+
         <form action="/articles/<%= article.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
             <%- include('_form_fields') %>
         </form>
+        
         <a href="#popUp" class="btn btn-danger">Eliminar</a>
     </div>
 
