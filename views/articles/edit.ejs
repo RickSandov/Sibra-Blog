@@ -12,13 +12,28 @@
 
 <body>
 
-    <div class="posts-container mt-5">
+    <div class="posts-container mt-5" id="edit">
         <h1 class="mb-4">Editar Post</h1>
 
         <form action="/articles/<%= article.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
             <%- include('_form_fields') %>
         </form>
+        <a href="#popUp" class="btn btn-danger">Eliminar</a>
     </div>
+
+    <div class="popUp" id="popUp">
+        <div class="popUp__content">
+            Desea eliminar el post:<strong><%= article.title %></strong> 
+            <div class="buttons">
+                <form action="/articles/<%= article.id %>?_method=DELETE"  method="POST">
+                    <button type="submit" class="cancel">Si</button>
+                </form>
+                <a href="#edit" class="continue">No</a>
+            </div>
+        </div>
+    </div>
+
+    
 
 </body>
 
