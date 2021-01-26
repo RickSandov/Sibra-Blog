@@ -40,10 +40,6 @@
         padding: 2rem;
         display: flex;
         flex-direction: column;
-        align-items: space-between;
-        justify-content: space-between;
-        // flex-shrink: 1;
-        // height: 100%;
         flex: 0 1 65%;
     }
 
@@ -73,6 +69,7 @@
         color: #46d148;
         margin-top: 2rem;
         align-self: flex-end;
+        margin-top: auto !important;
     }
 
     & .btn-admin {
