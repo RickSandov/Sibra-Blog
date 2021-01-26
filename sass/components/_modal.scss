@@ -1,0 +1,63 @@
+.popUp {
+    opacity: 0;
+    visibility: hidden;
+    transition: .4s target ease-in-out;
+    animation-fill-mode: backwards;
+    overflow: hidden;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+
+    &:target {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    &__content {
+        height: 250px;
+        width: 350px;
+        background-color: white;
+        border-radius: .8rem;
+        @include shadow;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 2rem;
+
+        & .buttons {
+            margin-top: 3rem;
+            display: flex;
+
+            & button{
+                border: none;
+                background: none;
+                color: tomato;
+                border: 1px solid tomato;
+                margin-right: 2rem;
+                outline: none;
+            }
+
+            & a {
+                text-decoration: none;
+                background-color: green;
+                color: white;
+                background-color: light-green; 
+            }
+
+            & button,
+            & a {
+                border-radius: .8rem;
+                padding: 1rem 4rem;
+            }
+        }
+    }
+}

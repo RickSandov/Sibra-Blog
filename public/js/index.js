@@ -26,3 +26,27 @@ navbarToggler.addEventListener('click', () => {
   // console.log('click')
   navbar.classList.toggle('active');
 });
+
+
+
+// Modal DELETE confirmation
+
+
+
+// const addModal = () => {
+//   const modal = document.createElement('div');
+//   modal.classList.add('modal');
+
+//   const post = document.getElementById('post');
+//   post.appendChild(modal);
+// }
+
+
+// const addModal = () => {
+//   const modal = document.createElement('div').classList.add("modal");
+//   const modalContent = document.createElement('div').classList.add('modal__content');
+
+//   modal.appendChild(modalContent);
+//   const post = document.getElementById("post");
+//   post.appendChild(modal);
+// }
