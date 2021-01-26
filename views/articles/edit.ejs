@@ -26,9 +26,9 @@
             Desea eliminar el post:<strong><%= article.title %></strong> 
             <div class="buttons">
                 <form action="/articles/<%= article.id %>?_method=DELETE"  method="POST">
-                    <button type="submit" class="cancel">Si</button>
+                    <button type="submit" class="continue">Si</button>
                 </form>
-                <a href="#edit" class="continue">No</a>
+                <a href="#edit" class="cancel">No</a>
             </div>
         </div>
     </div>

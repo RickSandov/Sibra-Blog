@@ -154,6 +154,56 @@
   box-shadow: rgba(0, 0, 0, 0.25) 0 3px 11px 0 !important;
   z-index: 999; }
 
+.popUp {
+  opacity: 0;
+  visibility: hidden;
+  transition: .4s target ease-in-out;
+  animation-fill-mode: backwards;
+  overflow: hidden;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .popUp:target {
+    opacity: 1;
+    visibility: visible; }
+  .popUp__content {
+    height: 250px;
+    width: 350px;
+    background-color: white;
+    border-radius: .8rem;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.192);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem; }
+    .popUp__content .buttons {
+      margin-top: 3rem;
+      display: flex; }
+      .popUp__content .buttons button {
+        border: none;
+        background: none;
+        color: tomato;
+        border: 1px solid tomato;
+        margin-right: 2rem;
+        outline: none; }
+      .popUp__content .buttons a {
+        text-decoration: none;
+        background-color: green;
+        color: white;
+        background-color: light-green; }
+      .popUp__content .buttons button,
+      .popUp__content .buttons a {
+        border-radius: .8rem;
+        padding: 1rem 4rem; }
+
 .posts-container {
   width: 1000px;
   margin: 13rem auto 8rem auto; }
